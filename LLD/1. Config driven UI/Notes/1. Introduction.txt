@@ -1,0 +1,69 @@
+- What is a config driven UI architecture ?
+
+When the layout of frontend is driven by backend then we call this type of architecture as config driven
+UI architecture. This whole layout is received in the form of JSON and this JSON helps us to create the
+whole UI on the viewport.
+
+- Why we need this config driven UI architecture, what is the use of this architecture, what problem
+does it solves ?
+
+Let's discuss this using an example:
+
+Suppose we are building an e-commerce website and we are creating the homepage of it right now. Now the 
+homepage is very complex for these kind of websites which are operating on the world-wide level, now it 
+may happen that 2 users will see the different kind of layout or UI on their screen and it can vary by
+multiple factors like location, search history (depends upon the recommendation system), etc. 
+
+Now this is a global website and suppose their is some event in India and we want to change the layout
+of the website according to this event for India only, then a problem arise here, how can we introduce 
+some components which can only be seen by Indian community. 
+
+To solve this issue we can use this config driven UI architecture, we can get the components config from
+the backend and then render the UI on viewport according to the received component architecture.
+
+Suppose we need to run some offer only for Delhi, some for Banglore, some for First time users only this
+all can be achieved using this type of architecture.
+
+- What are the steps to be followed to implement this architecture ?
+
+An API call will be made on page load, we receive the config in the form of JSON in the response of the 
+API. Then we can use the config and render the UI on viewport.
+
+Example of a config file:
+
+config = {
+    {type: 'Carousel'},
+    {type: 'Horizontal scroll cards', 
+        child: [
+        {
+            card: 'Card 1'
+        },
+        {
+            card: 'Card 2'
+        }
+        ]
+    }
+}
+
+The above config will decide the layout of the website.
+
+- What are the pros and cons of this type of architecture ?
+
+Pros: 
+
+1. Dynamic update
+2. Centralized control
+3. A/B testing
+4. Reduce client-side complexity
+5. Cross platform compatibility
+6. Faster feature delivery
+
+Cons:
+
+1. Network dependency
+2. Potential performance issues
+3. Increased server complexity
+4. Debugging challenges
+5. Potential for data redundancy
+
+PS: We also call this type of UI as Dynamic UI.
