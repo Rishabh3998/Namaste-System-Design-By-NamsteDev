@@ -1,0 +1,1 @@
+In order to create a multi language website, It's better if we use a config driven UI architecture.
