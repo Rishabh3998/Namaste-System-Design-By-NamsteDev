@@ -69,3 +69,7 @@ Example:
 
 1. User profile page
 2. Paid features access
+
+To implement Protected routing logic, create a HOC component which will handle all the routing for the 
+protected routes. HOC or any general component which has business logic should follow SOLID principal
+i.e. to have single responsibility to work upon. 

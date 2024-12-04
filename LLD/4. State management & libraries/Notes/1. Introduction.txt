@@ -1,0 +1,23 @@
+- What is state management ?
+
+state is a dynamic data storage that provides a mechanism for components to manage, keep track of 
+changing data, and trigger re-rendering when it is updated, and the management of these states in
+the data layer of the components known as state management.
+
+- Why do we need state ?
+
+We need it to enable the dynamic behavior and the interactivity in the UI.
+
+- What we need to know ?
+
+1. Local state (Managed inside the components).
+    -   Any dynamic data in the component.
+
+2. Prop drilling concept.
+    -   Unnecessary passing of props inside the unwanted components.
+
+3. State management libraries.
+    -   Redux, Zustand (A central place where our state exists)
+
+4. Context API.
+
