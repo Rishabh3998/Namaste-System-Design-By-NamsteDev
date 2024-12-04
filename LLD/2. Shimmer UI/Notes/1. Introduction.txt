@@ -1,0 +1,5 @@
+- What is Shimmer UI ?
+
+In modern day websites instead of using loading icons, Shimmer UI is getting employed, the reason of this
+is totally depends upon the user psychology. Also It is just a better way to show loading states instead
+of icons and all.
