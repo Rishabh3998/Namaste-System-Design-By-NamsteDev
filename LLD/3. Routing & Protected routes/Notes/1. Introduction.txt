@@ -1,0 +1,71 @@
+- What is routing and why we use it ?
+
+In web development, routing is the mechanism for navigating between different pages or views of an 
+application based on the URL.
+
+In React, we use routing to:
+
+Create single-page applications (SPAs):
+Routing is a way to convert our single-page application to multi-page application, under the hood only
+one HTML is getting used like single page application but for the user it will be a multi page app. 
+
+Organize and structure your application:
+
+Handle navigation:
+
+Benefits of using a routing library like React Router:
+
+Declarative syntax:
+React Router provides a declarative way to define routes, making your code more readable and 
+maintainable.
+
+Client-side routing:
+React Router handles routing on the client-side, which means that navigation happens without making 
+requests to the server, improving performance.
+
+Nested routes:
+React Router supports nested routes, which allows you to create complex navigation structures that 
+reflect the hierarchy of your application.
+
+Dynamic routing:
+React Router allows you to define dynamic routes that match patterns in the URL, making it easy to 
+create flexible and data-driven navigation.
+
+Case study:
+
+Suppose you are creating an e-commerce platform and you have created multiple routes. So make sure the
+routes that you created initially are the final routes according to the system you designed, because it
+will be a lot harder to change routes after defining them. It can also highly impact the application as
+well.
+
+Like suppose you created a route "/team" and now after some time you want to change it to "/profile/team/"
+then by doing this and doing this multiple times will affect the SEO of the app. And this will happens
+because when we deploy our application on the sever the search engine web crawlers go through our site 
+and rank them according to the defined rules but if we keep changing the routes of our app the resources
+will shift with them, which will create issues for web crawlers. Hence it will affect our SEO.
+
+Everything we search on internet is indexed according to their routes so we have to be careful with the 
+routes situation.
+
+Case study:
+
+Suppose you have a very large scale application and it is used by millions of people, then it is normal
+for some of them to bookmark the important page which will eventually considered as the bookmarking the 
+route, Now suppose if after some time due to some reason we need to change those routes then these some
+people will go visit the old route and the page will throw error because it is not there now. 
+
+So in this case instead of changing the route we generally prefer to redirect the user to the new route 
+who visited the old route. Still this is not the best solution but can work temporarily. Redirection is
+just a fallback.
+
+PS: Take good care of nested routes also.
+
+- What are Protected routes ?
+
+A "protected route" refers to a specific page or section within a web application that requires users to 
+be authenticated or authorized before they can access it.
+
+Example: 
+
+1. User profile page
+2. Paid features access
