@@ -1,0 +1,12 @@
+To understand the implementation of infinite scroll, we need to know about some events first.
+
+1. window.innerHeight
+    -   This gives us the height of viewport (Height of the page that we can view without scrolling).
+
+2. document.body.scrollHeight
+    -   This will give the height of the whole web-page.
+
+3. window.scrollY
+    -   This gives us how much we scrolled the webpage in y-axis.
+
+Formula = window.scrollY + window.innerHeight == document.body.scrollHeight => Reached the end of page.
