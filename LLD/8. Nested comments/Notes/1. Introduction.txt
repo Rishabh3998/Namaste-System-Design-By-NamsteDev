@@ -1,0 +1,3 @@
+This problem can be solved by using a tree like data structure to store our data.
+
+To traverse the data we have to use recursion.
