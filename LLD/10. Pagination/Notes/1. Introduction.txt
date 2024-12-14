@@ -1,0 +1,48 @@
+- What is Pagination ?
+
+When we have the large amount of data and we need to show it on a website. Like suppose we have millions
+of entires then we cannot show them directly on the webpage in one go, we need a mechanism to show them
+on the webpage in a proper manner so that user would not get overwhelmed. 
+
+So, we broke down the data into multiple clusters and show them with same count of entries on each defined
+page one by one. 
+
+- Why do we need Pagination ?
+
+To make our app clutter free and easy to use.
+
+- What type of Pagination is used in which kind of application ?
+
+We need to make sure if the current app on which we are working even need a pagination, we cannot just
+implement pagination if the app does not require any.
+
+- Why we are choosing this particular type/technique of Pagination ?
+
+It totally depends upon the product requirement, when we need a limited set of data and need the next 
+set of data after some user action, we call this mechanism pagination. So, a simple list of buttons 
+with page number can helps with pagination and even the infinite scroll can help us with pagination.
+
+Infinite scroll is an effective alternative solution tha n simple pagination.
+
+
+- Difference between Pagination and Infinite scroll.
+
+                    Pagination                      |                  Infinite scroll
+                                                    |
+1. Structure and Hierarchy in data.                 |  1. Data is not structured properly.
+2. Data is finite (we know how much entries we      |  2. Data is infinite, Totally depends upon the data 
+   will see on a random page).                      |     present inside the database.
+3. Back and Forth movement/navigation is possible.  |  3. No back and forth the previous data will be there.
+4. We get the footer.                               |  4. No footer.
+                                                    |  5. It is addictive, mobile friendly and Real time.
+                                                    |
+
+- How can we implement this ? What type of strategies we can use ?
+
+
+- Explain different kind of pagination.
+
+Frontend: Client side pagination
+Backend: Server side pagination
+
+

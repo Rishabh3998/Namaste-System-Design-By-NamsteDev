@@ -1,0 +1,97 @@
+# Requirements gathering:
+
+- Let's start by gathering the requirements for creating this instagram app.
+
+Functional requirements:
+
+- Feed management:
+    - List || View
+    - Create || delete || update (Only title of the post) a post.
+    - Comments and Likes
+
+- Reels:
+    - List || View
+    - Create Reels
+
+- Stories:
+    - List || View
+    - Create stories
+
+- Browse:
+    - People
+    - Trending topics 
+
+- Chatting:
+- Account management:
+
+- Profile management:
+    - Profile page 
+    - Profile settings
+    - Followers
+
+Non-Functional requirements:
+
+- Security:
+    - Private Profile
+
+- Responsiveness:
+    - Mobile, Tablet, Desktop
+
+- Authentication:
+    - Public routes
+    - Private routes
+
+- SEO:
+- Optimizations:
+    - Virtualization of Feed
+    - Lazy loading (Load only those feeds which are in the viewport).
+
+- Accessibility:
+- Offline support:
+
+
+Scoping of the above requirements:
+
+Only include basic requirements for now, so that the app will be functional with the minimum effort.
+
+# Architecture Design:
+
+Architecture design will revolve around, where should we execute operations ? Because we can either use
+Client side or we can use server side. We need to bifurcate which things will get execute on client and
+which one will get's execute on server.
+
+Client side:
+
+1. Storage
+    - React context / Redux / Zustand (State management)
+    - Apollo cache (Network caching and state management)
+    - LocalStorage
+    - IndexedDB
+
+The decision of what kind of Storage we need to use will also depends upon what type of API architecture we
+are going to use on the server side, example: REST, GraphQL.
+
+- We will use view-controller architecture
+
+2. View (UI) Layer
+    - List || Read Feed view
+    - Create / Upload / Delete Feed || Post 
+
+3. Controller (Business logic) Layer
+    - Provide Filters to the image that's going to be posted.
+    - Image editing (Cropping etc.....)
+    - Upload Image / Post / Story / Reels.
+
+4. Services Layer
+    - This layer will contains all our service files, all API calling logic will place here.
+
+Server Side:
+
+1. API gateway:
+    - Our service layer will hit this gateway to do the manipulations with the data present on server. 
+    - This gateway will bifurcate the request to the concerned service, example: Auth related services 
+      will go to the auth service etc...
+
+2. Service Layer:
+3. Cache Layer:
+4. DB 
