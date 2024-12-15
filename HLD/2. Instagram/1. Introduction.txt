@@ -95,3 +95,126 @@ Server Side:
 2. Service Layer:
 3. Cache Layer:
 4. DB 
+
+# Component Architecture:
+
+1. Feed
+    - Feed List || View Feed
+        - Like & Reaction
+        - Comments
+        - Caption
+        - User details header
+        - Post container (To show post / image that was uploaded)
+    
+    - Feed Create || Post Create 
+        - Form
+            - Image Upload
+            - Enter Caption
+            - Location
+            - Tags
+            - Filters
+
+# Data Model:
+
+1. Post:
+    - id
+    - caption
+    - createdAt
+    - modifiedAt
+    - userId
+    - mediaId[]
+    - comments[]
+    - likes
+
+2. Feed:
+    - postId[]
+    - totalPosts
+
+3. User:
+    - id
+    - name
+    - profileImageUrl
+
+4. Media:     
+    - id
+    - type (image or video)
+    - url 
+
+# API structure:
+
+1. Feed List
+    - Request
+        - /feedList?page=1&pageSize=20 => GET request
+    - Response
+        - {
+            count: 10 => total number of results/feeds can be shown on a page (For pagination)
+            next: null
+            previous: null
+            results: [
+                {
+                    id: 1,
+                    name: "post 1",
+                    ....
+                },
+                {
+                    id: 2,
+                    name: "post 2",
+                    ....
+                }
+            ]
+        }
+
+2. Create Post/Feed
+    - Request
+        - /createPost (With upload)
+        - /upload
+        - /createPost (Without upload)
+
+# Optimizations:
+
+1. Assets related optimizations
+    - Image related
+        - Format: webP
+        - srcset: images => srcset is a string which identifies one or more image candidate strings, 
+                            separated using commas (,) each specifying image resources to use under given 
+                            circumstances.
+        - userAgent: ... => give user related info like which browser we are using, OS we are using etc.
+        - dpr (device pixel ratio): ... => The devicePixelRatio of Window interface returns the ratio of 
+                                           the resolution in physical pixels to the resolution in CSS pixels 
+                                           for the current display device. 
+        - Device/Internet connectivity: 2G/3G/4G => Optimize images according to this.
+        - Prefetch images
+        - Prefetch thumbnails till videos are loading
+
+2. Feed optimizations
+    - SSR (Above the fold - ATF) => The first load can be done on the server side so that we can load initial
+                                    posts instantly, rest can be lazy loaded.
+    - Lazy loading 
+    - Infinite scroll
+    - Virtualization
+    - Intersection observable
+    - Code splitting JS
+    - Shimmer UI
+    - Preserving feed scroll positions
+    - Web workers for filters (Applying filters on images using a separate threads)
+    - Optimistic updates => This helps in better UX, example: Youtube like system and instagram like system
+                            use optimistic approach to show animation of like, when a user click on the like
+                            button we simply run the animation of like success and parallely trigger the api 
+                            call to like the concerned post, because we are optimistic about this api that 
+                            it will give success status and will not fail, this kind of approach is 
+                            considered as the optimistic approach, the opposite kind of approach is called 
+                            as pessimist approach.
+
+# Implementation approach:
+
+1. Image editing
+    - Crop / Resizing (Canvas API)
+    - Filters (CSS filters)
+
+2. Upload file
+    - HTTP Post method (multipart/form data) => Here we are uploading entire data as a multipart, we take 
+                                                everything as the POST data and upload them as multipart.
+    - Base64 encoding => Convert the image to base64 and upload it to the server. When we want to show that
+                         image we get that and decode it to normal format and render it.
+    - Multi selection => Can restrict image formats and number of selections of images getting upload.
+    - File chunking / Resumable uploads => Upload the big size files in chunks.
