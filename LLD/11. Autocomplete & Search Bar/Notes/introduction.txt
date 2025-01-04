@@ -1,0 +1,9 @@
+Let's talk about optimizations, which can helps us to improve the performance of our app.
+
+Issues:
+
+1. Too many API calls. (If we are calling API on each stroke).
+    -   Can solve this one by using debouncing inside useEffect to limit the rate of API call function.
+
+2. API calling for same query written prior to the current search text.
+    -   Can solve this by doing caching of the search result.
