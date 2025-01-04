@@ -35,14 +35,87 @@ Infinite scroll is an effective alternative solution tha n simple pagination.
 3. Back and Forth movement/navigation is possible.  |  3. No back and forth the previous data will be there.
 4. We get the footer.                               |  4. No footer.
                                                     |  5. It is addictive, mobile friendly and Real time.
-                                                    |
-
-- How can we implement this ? What type of strategies we can use ?
-
+                                                    |  6. Bad for SEO, searching is an issue
 
 - Explain different kind of pagination.
 
 Frontend: Client side pagination
+- Fetch all the data at once, and then populate some fixed number of entries on each page.
+- The API called will be done only once, and the data can be stored on the client side.
+
+                    Pros                            |                  Cons
+                                                    |
+1. Since we fetched all the data at once, therefore | 1. Initial load time will be high.
+   the page change will be faster and UX will be    | 2. It is browser heavy.
+   much more good (Faster page navigation).         | 3. The page can be very slow initially.
+2. Less API calls (at max one)                      | 
+3. Easy to implement.                               |     
+4. Data can be easily transformed using map, filter,|
+   reduce.                                          |  
+                                                    |  
+
 Backend: Server side pagination
+- Fetch the data one by one when the user will click on the page, and render that instantly.
+- We can also use an optimization here: Cache the data when the data is loaded, so that if the same page is 
+  visited again then no new API call would be there.
 
+                    Pros                            |                  Cons
+                                                    |
+1. Works efficiently on large data.                 | 1. Large number of API calls would be there.
+2. Initial load time is very low.                   | 2. For each change on the page there would be API call.
+   much more good (Faster page navigation).         |    Examples: Sorting of data, searching for data etc.
+                                                    | 3. Backend dependency would be there.
 
+- How can we implement this ? What type of strategies we can use ?
+
+For server side:
+- Offset pagination technique (Why offset? Page is called as offset and pageSize is called as limit)
+   - API call: /products?page=1&pageSize=10
+
+- Cursor pagination technique
+   - Why cursor pagination ?
+      - So, there a small problem with offset pagination and cursor pagination solves that problem.
+      - Let's discuss about the problem in offset pagination first.
+
+      Example:
+
+      a  |  t                      d                           e
+      b  |  u                      e                           m  
+      c  |  a                      f                           n
+      d  |  b                      g                           o  
+
+      page 1                     page 2                      page 3
+
+      offset: 0 (skip)           offset: 4                   offset: 8
+      limit: 4                   limit: 4                    limit: 4 (No. of records)
+
+      suppose 2 new              c,d will shift              f,g will shift here.
+      users entered on           here.
+      page 1. The first
+      2 will move down 
+      and the new ones
+      will enter on the 
+      above in the list.
+
+      Now, when the user is going from page 2 to page 3 and in the time between 2 new users added
+      on the page 1, all the data will be shifted, and when he will visit there he will see the 
+      last 2 entries of page 2 on page 3 will make the user confuse. This is the problem in 
+      offset pagination technique. So, when the data is real time we don't use offset pagination,
+      instead of this we use cursor pagination. Offset works well with static data.
+
+      To solve this issue facebook suggested a solution which named as cursor pagination.
+      - When to use ?
+         - When the data is real-time (dynamic).
+         - No skipped entries, no missing entries also.
+         - Faster then offset pagination.
+      
+      - While making an API call when we are using this pagination, we do not set offset,
+        we send something called cursor (It is basically kind of like a unique property for an 
+        element.) and along with this we also send the count (How much data we want).
+
+      - How the data fetching will work ?
+         -  When we send the cursor and limit in the api, the backend will find the cursor in the
+            database and then send the next limit - 1 entries with the cursor. 
+            Example: cursor = 7 and limit = 4
+            output: 7,8,9,10 (These entries we will get inside the response)
+         
