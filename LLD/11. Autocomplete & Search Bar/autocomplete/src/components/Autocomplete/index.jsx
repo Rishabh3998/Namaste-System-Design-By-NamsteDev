@@ -4,6 +4,7 @@ const Autocomplete = () => {
   const [query, setQuery] = useState("");
   const [result, setResult] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [cache, setCache] = useState({});
 
   const handleChange = (e) => {
     setQuery(e.target.value);
@@ -19,14 +20,21 @@ const Autocomplete = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const res = await fetch(
-          `https://www.google.com/complete/search?client=firefox&q=${query}`
-        );
-        const data = await res.json();
-        setResult(data[1]);
-      } catch (error) {
-        console.error(error);
+      // Check if the query is already in the cache
+      if (cache[query]) {
+        setResult(cache[query]);
+      } else {
+        // If not then fetch the data
+        try {
+          const res = await fetch(
+            `https://www.google.com/complete/search?client=firefox&q=${query}`
+          );
+          const data = await res.json();
+          setCache({ ...cache, [query]: data[1] });
+          setResult(data[1]);
+        } catch (error) {
+          console.error(error);
+        }
       }
     };
 
@@ -38,7 +46,7 @@ const Autocomplete = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [query]);
+  }, [query, cache]);
 
   return (
     <div className="container">

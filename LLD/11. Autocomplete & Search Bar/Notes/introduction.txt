@@ -7,3 +7,4 @@ Issues:
 
 2. API calling for same query written prior to the current search text.
     -   Can solve this by doing caching of the search result.
+    -   We can use localStorage, Redux store etc for this optimization.
