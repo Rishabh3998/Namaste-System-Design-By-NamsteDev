@@ -118,4 +118,20 @@ For server side:
             database and then send the next limit - 1 entries with the cursor. 
             Example: cursor = 7 and limit = 4
             output: 7,8,9,10 (These entries we will get inside the response)
+
+      - Pros:
+         -  No data is missed or skipped while serving the data in the response.
+         -  No duplicacy is there.
+         -  Faster then offset pagination.
+            -  Offset pagination is like linked list therefore searching takes time in DB.
+            -  Cursor pagination is like finding an element in array using given index which takes 
+               O(1).
+            -  Works will with Real time data.
+
+      - Cons:
+         -  It very well suits with infinite scroll, so we can only use this with infinite scroll.
+         -  Sorting is not feasible.
+         -  It is a little tricky to implement in Backend and Frontend as well.
+
+      
          
