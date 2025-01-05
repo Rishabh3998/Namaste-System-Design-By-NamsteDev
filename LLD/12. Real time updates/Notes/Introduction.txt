@@ -1,0 +1,59 @@
+Real time Updates
+
+Some examples or applications that uses real time updates to work:
+-   Driver location in cab bookings app.
+-   Co-working on the same google docs, sheets etc.
+-   Live stream needs the real time updates.
+
+Strategies that we can employee to do real time updates (Can read from communication module)
+-   API polling
+    -   Long polling
+    -   Short polling
+
+-   Server side events
+-   Web sockets
+
+Some insights about the techniques:
+
+-   API polling:
+    -   Client will fetch the data multiple times after a fixed amount of time-span.
+        -   Suppose to update a dashboard client is requesting for data from the server after every
+            5 seconds.
+        -   Suppose server does not have any new data to share so it will share the previous data
+            due to which unnecessary api calls will be made which can waste resources (Issue).
+    -   Long polling: Here some architecture will be followed like simple API polling / short polling
+        the main difference here will be that if server does not have any updated data so it will wait 
+        till the new data is updated in the server and only then send the data in the response.
+
+-   Server side events:
+    -   It works like a push notification system, It's not like that client will make request after a 
+        certain amount of time. The server will send the data when new data will be there. So the 
+        receiving of response will be irregular. The data can be received anytime.
+
+    - How this works ?
+        -   Step 1: Client will subscribe to the server.
+        -   Step 2: Whenever the server will have the data it will send it to the subscriber.
+        -   Now the data will be received by the client whenever there will be a new data, no need to 
+            be done anything new from client side.
+
+-   Websockets:
+    -   Step 1: Client makes a connection with the server.
+    -   It follows a duplex system.
+    -   The data can go from client to server or vice versa anytime.
+    -   Step 2: Now after the connection gets established data sharing can happen anytime.
+
+
+                    Polling                         |                  Websockets
+                                                    |
+1. One way (Half duplex)                            | 1. Two way (duplex)
+2. API calls are a lot, and this is                 | 2. One time connection is made and that's all.
+   an expensive process. Each API call need to      |    Not expensive at all.
+   establish a connection due to which the process  | 
+   becomes expensive.                               |
+3. Easy compatible with browser we can do API       | 3. Not that compatible.
+   polling anywhere.                                |
+4. Near to the real-time. (some interval is there.) | 4. Totally near time.
+                                                    |    
+   Examples: Dashboards, Gmail, Driver locations,   | Examples: Live chat application,
+             youtube live stream etc.               |           Google docs, sheet etc.
+                                                    |
